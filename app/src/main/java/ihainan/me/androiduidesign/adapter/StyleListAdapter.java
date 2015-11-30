@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import ihainan.me.androiduidesign.R;
-import ihainan.me.androiduidesign.activities.ItemListStaggered;
+import ihainan.me.androiduidesign.activities.ItemListStaggeredActivity;
 import ihainan.me.androiduidesign.utils.GlobalVar;
 
 /**
@@ -49,9 +49,9 @@ public class StyleListAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ItemListStaggered.class);
-                intent.putExtra(ItemListStaggered.TYPE_TAG, "STYLE");
-                intent.putExtra(ItemListStaggered.TEXT_TAG, p);
+                Intent intent = new Intent(mContext, ItemListStaggeredActivity.class);
+                intent.putExtra(ItemListStaggeredActivity.TYPE_TAG, "STYLE");
+                intent.putExtra(ItemListStaggeredActivity.TEXT_TAG, p);
                 mContext.startActivity(intent);
             }
         });

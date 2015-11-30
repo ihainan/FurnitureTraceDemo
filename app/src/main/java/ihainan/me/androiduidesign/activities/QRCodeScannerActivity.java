@@ -81,7 +81,6 @@ public class QRCodeScannerActivity extends AppCompatActivity {
         mQRCodeScanner.setResultHandler(new ZXingScannerView.ResultHandler() {
             @Override
             public void handleResult(Result result) {
-                // Toast.makeText(getApplicationContext(), result.getText().toString(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(QRCodeScannerActivity.this, ItemDetailActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(ItemDetailActivity.ITEM_ID_, Integer.parseInt(result.getText()));

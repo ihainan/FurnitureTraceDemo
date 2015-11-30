@@ -28,18 +28,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/toolbar_icon_margin_left_and_right"
                     android:text="HOME"
-                    android:textColor="#FFF"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/back_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="@dimen/toolbar_icon_padding_left_or_right"
-                    android:src="@drawable/ic_arrow_back_white_24dp" />
+                    android:textColor="@color/toolbar_title_text_color"
+                    android:textSize="@dimen/toolbar_title_text_size" />
 
                 <LinearLayout
                     android:id="@+id/action_bar_search_layout"
@@ -59,9 +51,9 @@
                         android:id="@+id/action_bar_search_text"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/toolbar_margin_between_search_text_icon"
                         android:gravity="center"
-                        android:text="Search Furniture"
+                        android:text="@string/search_normal_text"
                         android:textColor="@color/search_button_color" />
                 </LinearLayout>
 
@@ -71,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="13dp"
+                    android:layout_marginRight="@dimen/toolbar_icon_margin_left_and_right"
                     android:paddingLeft="@dimen/toolbar_icon_padding_left_or_right"
                     android:src="@drawable/ic_perm_identity_white_24dp" />
             </RelativeLayout>

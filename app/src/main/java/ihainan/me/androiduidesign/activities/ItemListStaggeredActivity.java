@@ -27,13 +27,15 @@ import ihainan.me.androiduidesign.R;
 import ihainan.me.androiduidesign.adapter.StaggeredItemAdapter;
 import ihainan.me.androiduidesign.model.Furniture;
 import ihainan.me.androiduidesign.utils.ClientRequestQueue;
+import ihainan.me.androiduidesign.utils.CommonUtils;
 import ihainan.me.androiduidesign.utils.JSONUtil;
 
-public class ItemListStaggered extends AppCompatActivity {
+public class ItemListStaggeredActivity extends AppCompatActivity {
     public final static String TYPE_TAG = "TYPE_TAG";
     public final static String TEXT_TAG = "TEXT_TAG";
-    public final static String TAG = ItemListStaggered.class.getSimpleName();
+    public final static String TAG = ItemListStaggeredActivity.class.getSimpleName();
 
+    /* UI Elements */
     private StaggeredGridView mGridView;
     private TextView tvSearch;
 
@@ -57,6 +59,10 @@ public class ItemListStaggered extends AppCompatActivity {
         /* 设置 Toolbar */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        /* 设置 Padding Top */
+        float actionBarHeight = CommonUtils.getToolBarHeight(ItemListStaggeredActivity.this);
+        mGridView.setPadding(mGridView.getPaddingLeft(), (int) actionBarHeight, mGridView.getPaddingRight(), mGridView.getRowPaddingBottom());
 
         /* 设置搜索按钮和文字 */
         tvSearch.setText("Search under #" + textTag);
@@ -84,7 +90,7 @@ public class ItemListStaggered extends AppCompatActivity {
             }
         });
 
-        /* 隐藏后退按钮 */
+        /* 设置后退按钮 */
         ImageView backButton = (ImageView) findViewById(R.id.back_btn);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,13 +98,6 @@ public class ItemListStaggered extends AppCompatActivity {
                 finish();
             }
         });
-
-        /* 设置 GridView */
-        float actionBarHeight = 0.0f;
-        TypedValue tv = new TypedValue();
-        if (getTheme().resolveAttribute(R.attr.actionBarSize, tv, true))
-            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-        mGridView.setPadding(mGridView.getPaddingLeft(), (int) actionBarHeight, mGridView.getPaddingRight(), mGridView.getRowPaddingBottom());
 
         /* 构造请求 URL */
         switch (typeTag) {

@@ -31,9 +31,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:paddingBottom="@dimen/toolbar_icon_padding_top_and_bottom"
+                    android:layout_marginLeft="@dimen/toolbar_icon_margin_left_and_right"
                     android:paddingRight="@dimen/toolbar_icon_padding_left_or_right"
-                    android:paddingTop="@dimen/toolbar_icon_padding_top_and_bottom"
                     android:src="@drawable/ic_arrow_back_white_24dp" />
 
                 <LinearLayout
@@ -54,7 +53,7 @@
                         android:id="@+id/action_bar_search_text"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/toolbar_margin_between_search_text_icon"
                         android:gravity="center"
                         android:text="Search Furniture"
                         android:textColor="@color/search_button_color" />
@@ -69,5 +68,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:column_count="0"
-        app:item_margin="10dp" />
+        app:item_margin="@dimen/gridview_item_margin" />
 </android.support.design.widget.CoordinatorLayout>

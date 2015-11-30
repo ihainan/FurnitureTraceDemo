@@ -17,8 +17,10 @@ import android.widget.TextView;
 
 import ihainan.me.androiduidesign.R;
 import ihainan.me.androiduidesign.adapter.HomePageCollectionPagerAdapter;
+import ihainan.me.androiduidesign.utils.CommonUtils;
 
 public class MainActivity extends AppCompatActivity {
+    public final static String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,58 +37,32 @@ public class MainActivity extends AppCompatActivity {
         searchLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                // 按钮点击变色
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    searchText.setTextColor(Color.WHITE);
+                    searchText.setTextColor(CommonUtils.getColorFromResourceID(MainActivity.this, R.color.search_button_clicked_color));
                     Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 } else {
-                    searchText.setTextColor(Color.rgb(181, 181, 181));
-                    searchText.setTextColor(getResources().getColor(R.color.search_button_color));
+                    searchText.setTextColor(CommonUtils.getColorFromResourceID(MainActivity.this, R.color.search_button_color));
                 }
                 return true;
             }
         });
 
-        /* 隐藏后退按钮 */
-        ImageView backButton = (ImageView) findViewById(R.id.back_btn);
-        backButton.setVisibility(View.INVISIBLE);
-
         /* 设置个人页按钮 */
-        ((ImageView)findViewById(R.id.person_page_btn)).setOnClickListener(new View.OnClickListener() {
+        ((ImageView) findViewById(R.id.person_page_btn)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 Intent intent = new Intent(getApplicationContext(), PersonInfoActivity.class);
-                 startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), PersonInfoActivity.class);
+                startActivity(intent);
             }
         });
 
-        /* 设置 Tabs */
+        /* 设置 TabPaper 和 TabLayout */
         ViewPager viewPaper = (ViewPager) findViewById(R.id.pager);
         viewPaper.setAdapter(new HomePageCollectionPagerAdapter(getSupportFragmentManager(), this));
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPaper);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return false;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

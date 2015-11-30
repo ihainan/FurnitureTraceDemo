@@ -60,7 +60,7 @@ public class ShoppingCart {
     /**
      * 清除所有物品
      */
-    public void clearAll(){
+    public void clearAll() {
         shoppingCartItemList.clear();
     }
 
@@ -73,7 +73,8 @@ public class ShoppingCart {
     public void setShoppingCartItem(int furID, int quantity) {
         for (ShoppingCartItem item : shoppingCartItemList) {
             if (furID == item.getFurID()) {
-                item.setQuantity(quantity);
+                if (quantity != 0) item.setQuantity(quantity);
+                else shoppingCartItemList.remove(item);
                 return;
             }
         }

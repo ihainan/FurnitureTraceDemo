@@ -3,21 +3,20 @@ package ihainan.me.androiduidesign.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.etsy.android.grid.StaggeredGridView;
 
 import ihainan.me.androiduidesign.R;
-import ihainan.me.androiduidesign.adapter.CategoryListAdapter;
+import ihainan.me.androiduidesign.adapter.TypeListAdapter;
 import ihainan.me.androiduidesign.adapter.StyleListAdapter;
+import ihainan.me.androiduidesign.utils.CommonUtils;
 
 /**
- * Created by ihainan on 11/25/2015.
+ * Tab 页适配.
  */
 public class HomePageObjectFragment extends Fragment {
     public final static String TAB_KEY = "FRAGEMENT_";
@@ -34,24 +33,21 @@ public class HomePageObjectFragment extends Fragment {
         Bundle args = this.getArguments();
 
         // ToolBar Height
-        float actionBarHeight = 0.0f;
-        TypedValue tv = new TypedValue();
-        if (getActivity().getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
-            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-        }
+        float actionBarHeight = CommonUtils.getToolBarHeight(mContext);
 
-        // Categories Tab
+        // Type Tab
         View rootView = null;
         if (args.getInt(TAB_KEY) == 0) {
             rootView = inflater.inflate(
-                    R.layout.page_category, container, false);
+                    R.layout.page_type, container, false);
 
-            LinearLayout linearLayout = (LinearLayout) rootView.findViewById(R.id.category_layout);
+            /* 设置 MarginTop */
+            LinearLayout linearLayout = (LinearLayout) rootView.findViewById(R.id.type_layout);
             linearLayout.setPadding(linearLayout.getPaddingLeft(), (int) actionBarHeight, linearLayout.getPaddingRight(), linearLayout.getPaddingBottom());
 
             /* 配置 GridView */
             StaggeredGridView gvCategory = (StaggeredGridView) linearLayout.findViewById(R.id.grid_view);
-            gvCategory.setAdapter(new CategoryListAdapter(mContext));
+            gvCategory.setAdapter(new TypeListAdapter(mContext));
         } else if (args.getInt(TAB_KEY) == 1) {
             // Style Tab
             rootView = inflater.inflate(

@@ -8,12 +8,18 @@
     <color name="red_pink_24">#ffe09280</color>
     <color name="red_pink_26">#ffec70b9</color>
     <color name="field_color">#a45dafcf</color>
+
+
     <color name="search_button_color">#B5B5B5</color>
+    <color name="search_button_clicked_color">#FFF</color>
 
     <color name="background">#EBEAE6</color>
 
-    <color name="bottom_layout_background">#2F2F2F</color>
+    <color name="bottom_layout_background">#62273D</color>
     <color name="bottom_layout_text">#E35890</color>
     <color name="bottom_layout_bottom">#EA9C51</color>
     <color name="bottom_layout_bottom_vote">#EA7F51</color>
+
+    <!-- Toolbar -->
+    <color name="toolbar_title_text_color">#FFF</color>
 </resources>

@@ -48,12 +48,13 @@ public class HomePageCollectionPagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Categories";
+                return "Type";
             case 1:
                 return "Style";
             case 2:
                 return "Recommendation";
         }
+
         return "Empty";
     }
 }

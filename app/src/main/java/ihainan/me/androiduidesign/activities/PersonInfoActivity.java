@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,13 @@ public class PersonInfoActivity extends AppCompatActivity {
         mLayoutShoppingCart = (RelativeLayout) findViewById(R.id.btn_shopping_cart);
 
         /* 配置页面 Padding Top */
+        float actionBarHeight = 0.0f;
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        }
+        mainLayout.setPadding(mainLayout.getPaddingLeft(), (int) actionBarHeight, mainLayout.getPaddingRight(), mainLayout.getPaddingBottom());
+
 
         /* 按钮事件 */
         ((ImageView) findViewById(R.id.back_btn)).setOnClickListener(new View.OnClickListener() {
@@ -108,13 +116,12 @@ public class PersonInfoActivity extends AppCompatActivity {
     private Runnable returnRes = new Runnable() {
         @Override
         public void run() {
-            mTvVotes.setText(mVoteList.size() + "\nvotes");
-            mTvShoppingCart.setText(ShoppingCart.getInstance().getCount() + "\nshopping cart");
+            mTvVotes.setText("" + mVoteList.size());
+            mTvShoppingCart.setText(ShoppingCart.getInstance().getCount() + "");
             mContentLayout.removeAllViews();
             mContentLayout.addView(getView());
         }
     };
-
 
     private StaggeredGridView mGridViewVote;
     private RelativeLayout mLayoutGridViewShoppingCart;
@@ -225,7 +232,7 @@ public class PersonInfoActivity extends AppCompatActivity {
             });
             return mGridViewVote;
         } else if (mCurrentPage == 1) {
-            if (mLayoutGridViewShoppingCart != null) return mLayoutGridViewShoppingCart;
+            // if (mLayoutGridViewShoppingCart != null) return mLayoutGridViewShoppingCart;
             mLayoutGridViewShoppingCart = (RelativeLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.page_shopping_cart, null, false);
 
             // 总价
@@ -241,9 +248,12 @@ public class PersonInfoActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             ShoppingCart.getInstance().clearAll();
-                            runOnUiThread(returnRes);
+                            totalPrice = 0;
+                            mTvShoppingCart.setText(ShoppingCart.getInstance().getCount() + "");
+                            mContentLayout.removeAllViews();
+                            mContentLayout.addView(getView());
                         }
-                    }).setNegativeButton("Cencle", new DialogInterface.OnClickListener() {
+                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();

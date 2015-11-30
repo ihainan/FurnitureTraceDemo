@@ -6,8 +6,27 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
-    <dimen name="toolbar_icon_padding_left_or_right">40dp</dimen>
-    <dimen name="toolbar_icon_padding_top_and_bottom">15dp</dimen>
 
     <dimen name="home_page_padding_top">0dp</dimen>
+
+
+    <!-- ToolBar -->
+    <dimen name="toolbar_title_text_size">20sp</dimen>
+    <dimen name="toolbar_margin_between_search_text_icon">10dp</dimen>
+    <dimen name="toolbar_icon_padding_left_or_right">40dp</dimen>
+    <dimen name="toolbar_margin_between_item">10dp</dimen>
+    <dimen name="toolbar_icon_padding_top_and_bottom">15dp</dimen>
+    <dimen name="toolbar_icon_margin_left_and_right">6dp</dimen>
+
+    <!-- Staggered GridView -->
+    <dimen name="gridview_item_margin">10dp</dimen>
+
+    <!-- Bottom -->
+    <dimen name="bottom_height">40dp</dimen>
+
+    <!-- Slider -->
+    <dimen name="slider_height">200dp</dimen>
+
+    <!-- TableRow -->
+    <dimen name="table_row_padding_top">10dp</dimen>
 </resources>

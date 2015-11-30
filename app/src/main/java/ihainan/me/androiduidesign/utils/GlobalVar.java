@@ -11,8 +11,8 @@ public class GlobalVar {
     /**
      * 家具类别
      */
-    public final static List<String> CATEGORIES_ENGLISH = new ArrayList<>();
-    public final static List<String> CATEGORIES_CHINESE = new ArrayList<>();
+    public final static List<String> TYPES_ENGLISH = new ArrayList<>();
+    public final static List<String> TYPES_CHINESE = new ArrayList<>();
 
     /**
      * 家具风格
@@ -26,8 +26,8 @@ public class GlobalVar {
     public final static List<String> STYLE_DESC = new ArrayList<>();
 
     static {
-        Collections.addAll(CATEGORIES_ENGLISH, new String[]{"bed", "chest", "sofa", "tvbench", "teatable", "dinnertable", "dinnerchair", "bookshelf"});
-        Collections.addAll(CATEGORIES_CHINESE, new String[]{"床", "衣柜", "沙发", "电视柜", "茶几", "餐桌", "餐椅", "书柜"});
+        Collections.addAll(TYPES_ENGLISH, new String[]{"bed", "chest", "sofa", "tvbench", "teatable", "dinnertable", "dinnerchair", "bookshelf"});
+        Collections.addAll(TYPES_CHINESE, new String[]{"床", "衣柜", "沙发", "电视柜", "茶几", "餐桌", "餐椅", "书柜"});
         Collections.addAll(STYLES_ENGLISH, new String[]{"Modern", "European", "Chinese", "Pastoralism"});
         Collections.addAll(STYLES_CHINESE, new String[]{"简约现代", "欧式古典", "中式现代", "美式乡村"});
         Collections.addAll(STYLE_DESC, new String[]{

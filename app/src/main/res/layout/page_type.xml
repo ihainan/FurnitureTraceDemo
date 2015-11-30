@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/category_layout"
+    android:id="@+id/type_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EBEAE6"
@@ -18,5 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:column_count="0"
-        app:item_margin="10dp" />
+        app:column_count_landscape="3"
+        app:column_count_portrait="2"
+        app:item_margin="@dimen/gridview_item_margin" />
 </LinearLayout>

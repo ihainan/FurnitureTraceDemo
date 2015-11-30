@@ -108,4 +108,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_test">Test</string>
+
+    <!-- UI -->
+    <string name="search_normal_text">Search Furniture</string>
 </resources>

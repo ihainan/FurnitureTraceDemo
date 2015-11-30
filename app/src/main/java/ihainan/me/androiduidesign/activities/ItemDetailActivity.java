@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -202,7 +203,6 @@ public class ItemDetailActivity extends AppCompatActivity {
                     .enableSaveImageByLongClick(getFragmentManager());
 
             // add your extra information
-            // textSliderView.getBundle().putString("extra", name);
             mDemoSlider.addSlider(textSliderView);
         }
     }
@@ -232,7 +232,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                 Logistics log = logs.get(i);
                 TableRow tableRow = (TableRow) LayoutInflater.from(getApplicationContext()).inflate(R.layout.content_item_log, null, false);
                 if (i != 0) tableRow.setPadding(tableRow.getPaddingLeft(),
-                        CommonUtils.dpToPixel(getApplicationContext(), 10),
+                        CommonUtils.dpToPixel(getApplicationContext(), getResources().getDimension(R.dimen.table_row_padding_top)),
                         tableRow.getPaddingRight(),
                         tableRow.getBottom());
                 ((TextView) tableRow.findViewById(R.id.item_log_date)).setText("" + new SimpleDateFormat("yyyy-MM-dd").format(log.getLog_date()).toString());

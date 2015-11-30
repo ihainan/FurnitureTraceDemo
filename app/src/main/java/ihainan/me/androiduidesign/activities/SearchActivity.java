@@ -55,8 +55,8 @@ public class SearchActivity extends AppCompatActivity {
 
         // 获取 Intent 参数
         Intent intent = getIntent();
-        final String typeTag = intent.getStringExtra(ItemListStaggered.TYPE_TAG);
-        final String textTag = intent.getStringExtra(ItemListStaggered.TEXT_TAG);
+        final String typeTag = intent.getStringExtra(ItemListStaggeredActivity.TYPE_TAG);
+        final String textTag = intent.getStringExtra(ItemListStaggeredActivity.TEXT_TAG);
 
         // UI elements
         mGridView = (StaggeredGridView) findViewById(R.id.grid_view);
@@ -71,32 +71,34 @@ public class SearchActivity extends AppCompatActivity {
 
         /* 设置 SearchActivity View */
         if (typeTag != null) {
-            mSearchView.setHint("Search under #" + textTag);
+            mSearchView.setHint("Search furniture under #" + textTag);
         }
-        mSearchView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+        /* 返回按钮 */
+        ((ImageView) findViewById(R.id.back_btn)).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, final boolean hasFocus) {
-                mSearchView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        if (!hasFocus) imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
-                    }
-                });
+            public void onClick(View v) {
+                finish();
             }
         });
 
+        /* 弹出输入法窗口 */
         mSearchView.requestFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(mSearchView, InputMethodManager.SHOW_FORCED);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
-        // 设置 Progress Bar
+        // 不显示 Progress Bar
         showProgress(false);
 
         /* 设置 QRCode Scanner */
         mQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 隐藏输入法窗口
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
+
+                // 跳转到新页面
                 Intent intent = new Intent(SearchActivity.this, QRCodeScannerActivity.class);
                 startActivity(intent);
             }

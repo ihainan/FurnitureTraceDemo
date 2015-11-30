@@ -64,6 +64,7 @@ public class StaggeredItemAdapter extends BaseAdapter {
         TextView itemPrice = (TextView) convertView.findViewById(R.id.item_price);
 
         if (furniture != null) {
+            // 随机更改图片大小
             android.view.ViewGroup.LayoutParams layoutParams = itemImage.getLayoutParams();
             if (originImageHeight == -1) originImageHeight = layoutParams.height;
             layoutParams.height = (int) (originImageHeight * (random.nextFloat() / 2 + 1.0));
@@ -72,6 +73,7 @@ public class StaggeredItemAdapter extends BaseAdapter {
                 Picasso.with(mContext).load(furniture.getPic().get(0).getPicAdd()).into(itemImage);
             else Picasso.with(mContext).load(R.drawable.categorybed).into(itemImage);
 
+            // 更新其他 UI
             itemName.setText("" + furniture.getFur_name());
             itemFactory.setText("" + furniture.getFur_brand());
             itemPrice.setText("￥" + furniture.getFur_price());

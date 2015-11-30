@@ -27,9 +27,10 @@
         </activity>
         <activity
             android:name=".activities.LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login">
+        </activity>
         <activity
-            android:name=".activities.ItemListStaggered"
+            android:name=".activities.ItemListStaggeredActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SearchActivity"

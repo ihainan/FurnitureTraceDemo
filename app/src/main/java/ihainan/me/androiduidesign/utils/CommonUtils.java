@@ -1,14 +1,19 @@
 package ihainan.me.androiduidesign.utils;
 
 import android.annotation.TargetApi;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.TypedValue;
+
+import ihainan.me.androiduidesign.R;
 
 /**
  * 通用工具
@@ -69,5 +74,45 @@ public class CommonUtils {
         Resources r = context.getResources();
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, r.getDisplayMetrics());
         return (int) px;
+    }
+
+    /**
+     * 根据 Resource ID 获取对应的颜色
+     *
+     * @param context    上下文
+     * @param resourceID Resource ID
+     * @return 颜色整数值
+     */
+    public static int getColorFromResourceID(Context context, int resourceID) {
+        return ContextCompat.getColor(context, resourceID);
+    }
+
+    /**
+     * 根据资源的 URI 获取 Drawable 实例
+     *
+     * @param context
+     * @param uri     资源 URI
+     * @return Drawable 实例
+     */
+    public static Drawable getDrawableByResourceName(Context context, String uri) {
+        int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
+        Drawable res = ContextCompat.getDrawable(context, imageResource);
+        return res;
+    }
+
+
+    /**
+     * 获取 Toolbar 的 Height
+     *
+     * @param context 上下文
+     * @return Toolbar Height
+     */
+    public static float getToolBarHeight(Context context) {
+        float actionBarHeight = 0.0f;
+        TypedValue tv = new TypedValue();
+        if (context.getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
+        }
+        return actionBarHeight;
     }
 }
