@@ -3,23 +3,20 @@ package ihainan.me.androiduidesign.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.LoaderManager.LoaderCallbacks;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -48,7 +45,7 @@ import ihainan.me.androiduidesign.utils.JSONUtil;
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
- * A login screen that offers login via email/password.
+ * A login screen that offers login via username / password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
     public final static String TAG = LoginActivity.class.getSimpleName();
@@ -93,8 +90,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        Button mUserSignInButton = (Button) findViewById(R.id.user_sign_in_button);
+        mUserSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
@@ -104,7 +101,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        /* 自动填充 */
+        /* 若用户之前成功登陆过，则自动填充用户名和密码字段 */
         SharedPreferences userProfile = getSharedPreferences(PREFS_NAME, 0);
         if (userProfile.getString(PREFS_FIELD_USER_NAME, null) != null) {
             mUserName.setText(userProfile.getString(PREFS_FIELD_USER_NAME, null));
@@ -122,6 +119,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         getLoaderManager().initLoader(0, null, this);
     }
 
+    /**
+     * 判断程序是否有读取通讯录权限
+     *
+     * @return 有权限则返回 <code>true</code>，否则返回 <code>false</code>
+     */
     private boolean mayRequestContacts() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
@@ -160,7 +162,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     /**
      * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
+     * If there are form errors (invalid username, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
@@ -205,11 +207,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    private boolean isUserNameValid(String email) {
+    /**
+     * 检查用户名是否合法
+     *
+     * @param userName 需要检查的用户名
+     * @return <code>true</code> 说明合法，否则不合法
+     */
+    private boolean isUserNameValid(String userName) {
         //TODO: Replace this with your own logic
         return true;
     }
 
+    /**
+     * 检查密码是否合法
+     *
+     * @param password 需要检查的密码
+     * @return <code>true</code> 说明合法，否则不合法
+     */
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return true;
@@ -296,7 +310,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     /**
-     * 检查用户密码是否正确
+     * 连接服务器检查用户密码是否正确，若正确则跳转到首页，否则报错
      *
      * @param userName 用户名
      * @param password 密码
@@ -332,18 +346,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onErrorResponse(VolleyError error) {
                 showProgress(false);
-                error.printStackTrace();
+                mUserName.setError(getString(R.string.error_fail_connection));
                 Log.e(TAG, "发送请求 " + url + " 失败 :" + error.getStackTrace());
             }
         });
 
+        // 添加到请求队列当中
         ClientRequestQueue.getInstance(getApplicationContext()).addToRequestQueue(strReq);
-
     }
 
 
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
+        // Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);

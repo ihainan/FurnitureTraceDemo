@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFF">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/style_image"
+                android:layout_width="fill_parent"
+                android:layout_height="140dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/categorychair" />
+
+            <TextView
+                android:id="@+id/style_name_shadow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/style_image"
+                android:layout_alignRight="@id/style_image"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="Noto"
+                android:text="Modern"
+                android:textColor="#EBEBEB"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/style_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/style_image"
+                android:layout_alignRight="@id/style_image"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="7dp"
+                android:fontFamily="Noto"
+                android:text="Modern"
+                android:textColor="#fff"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/style_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/style_image"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="4dp"
+                android:text="Fashion and Variation"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

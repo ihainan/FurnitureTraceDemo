@@ -26,15 +26,15 @@ public class GlobalVar {
     public final static List<String> STYLE_DESC = new ArrayList<>();
 
     static {
-        Collections.addAll(CATEGORIES_ENGLISH, new String[]{"Chair", "Bed", "Sofa", "Stool", "Chair", "Bed", "Sofa", "Stool"});
-        Collections.addAll(CATEGORIES_CHINESE, new String[]{"椅子", "床", "沙发", "凳子", "椅子", "床", "沙发", "凳子"});
-        Collections.addAll(STYLES_ENGLISH, new String[]{"Modern", "European", "Chinese",  "Pastoralism", "Children"});
-        Collections.addAll(STYLES_CHINESE, new String[]{"简约现代", "欧式古典", "中式", "韩式田园",  "儿童"});
+        Collections.addAll(CATEGORIES_ENGLISH, new String[]{"bed", "chest", "sofa", "tvbench", "teatable", "dinnertable", "dinnerchair", "bookshelf"});
+        Collections.addAll(CATEGORIES_CHINESE, new String[]{"床", "衣柜", "沙发", "电视柜", "茶几", "餐桌", "餐椅", "书柜"});
+        Collections.addAll(STYLES_ENGLISH, new String[]{"Modern", "European", "Chinese", "Pastoralism"});
+        Collections.addAll(STYLES_CHINESE, new String[]{"简约现代", "欧式古典", "中式现代", "美式乡村"});
         Collections.addAll(STYLE_DESC, new String[]{
-                "简单与务实",
-                "华丽与高雅",
-                "传统与现代",
-                "Description of Classicism Style",
+                "以少胜多，以简胜繁，安静与祥和",
+                "华丽装饰，浓烈色彩，惬意与浪漫",
+                "格调雅致，内涵丰富，山水与泼墨",
+                "贴近自然，清纯脱俗，朴实与亲切",
                 "Description of Children Style",
                 "Description of Pastoralism Style"});
     }

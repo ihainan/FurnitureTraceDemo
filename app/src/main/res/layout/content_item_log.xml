@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/item_log_date"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="2014-12-24 16:08:38"
+        android:textColor="#CDCDCD"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/item_log_status"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:text="【成品】成品。成品卧室床运往北京销售中心"
+        android:textColor="#777"
+        android:textStyle="bold" />
+</TableRow>

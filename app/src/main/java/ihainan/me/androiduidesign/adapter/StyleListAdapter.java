@@ -10,8 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import ihainan.me.androiduidesign.activities.ItemListActivity;
 import ihainan.me.androiduidesign.R;
+import ihainan.me.androiduidesign.activities.ItemListStaggered;
 import ihainan.me.androiduidesign.utils.GlobalVar;
 
 /**
@@ -44,14 +44,14 @@ public class StyleListAdapter extends BaseAdapter {
         final String p = getItem(position);
 
         if (convertView == null)
-            convertView = mVi.inflate(R.layout.style_card, null);
+            convertView = mVi.inflate(R.layout.content_style_item, null);
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ItemListActivity.class);
-                intent.putExtra(ItemListActivity.TYPE_TAG, "STYLE");
-                intent.putExtra(ItemListActivity.TEXT_TAG, p);
+                Intent intent = new Intent(mContext, ItemListStaggered.class);
+                intent.putExtra(ItemListStaggered.TYPE_TAG, "STYLE");
+                intent.putExtra(ItemListStaggered.TEXT_TAG, p);
                 mContext.startActivity(intent);
             }
         });

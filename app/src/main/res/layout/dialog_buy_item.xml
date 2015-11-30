@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/buy_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/app_name"
+        android:scaleType="center"
+        android:src="@drawable/ic_add_shopping_cart_white_24dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="Quantity: "
+        android:textSize="20sp" />
+
+    <biz.kasual.materialnumberpicker.MaterialNumberPicker
+        android:id="@+id/num_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:npMaxValue="50"
+        app:npMinValue="0"
+        app:npSeparatorColor="@color/colorAccent"
+        app:npTextColor="@color/colorPrimary"
+        app:npTextSize="16sp" />
+
+</LinearLayout>

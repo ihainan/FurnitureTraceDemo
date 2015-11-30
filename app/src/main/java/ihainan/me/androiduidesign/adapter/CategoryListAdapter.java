@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import ihainan.me.androiduidesign.activities.ItemListActivity;
+import ihainan.me.androiduidesign.activities.ItemListStaggered;
 import ihainan.me.androiduidesign.utils.GlobalVar;
 import ihainan.me.androiduidesign.R;
 
@@ -47,7 +47,6 @@ public class CategoryListAdapter extends BaseAdapter {
         return 0;
     }
 
-    // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
         final String p = (String) getItem(position);    // 获取类型信息
 
@@ -56,16 +55,16 @@ public class CategoryListAdapter extends BaseAdapter {
 
         /* 更新 UI */
         if (convertView == null) {
-            convertView = mVi.inflate(R.layout.category_card, null);
+            convertView = mVi.inflate(R.layout.content_category_item, null);
             holder.categoryImage = (ImageView) convertView.findViewById(R.id.category_image);
             holder.categoryName = (TextView) convertView.findViewById(R.id.category_name);
             convertView.setTag(holder);
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, ItemListActivity.class);
-                    intent.putExtra(ItemListActivity.TYPE_TAG, "TYPE");
-                    intent.putExtra(ItemListActivity.TEXT_TAG, p);
+                    Intent intent = new Intent(mContext, ItemListStaggered.class);
+                    intent.putExtra(ItemListStaggered.TYPE_TAG, "TYPE");
+                    intent.putExtra(ItemListStaggered.TEXT_TAG, p);
                     mContext.startActivity(intent);
                 }
             });

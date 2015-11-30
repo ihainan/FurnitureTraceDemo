@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,13 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.etsy.android.grid.StaggeredGridView;
+
 import ihainan.me.androiduidesign.R;
-import ihainan.me.androiduidesign.utils.GlobalVar;
+import ihainan.me.androiduidesign.activities.HomePageObjectFragment;
 
 /**
- * 主页 Tabs 的实现
+ * 主页 Tabs 适配器
  */
 public class HomePageCollectionPagerAdapter extends FragmentStatePagerAdapter {
     private Context mContext;
@@ -29,9 +32,9 @@ public class HomePageCollectionPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment = new DemoObjectFragment(mContext);
+        Fragment fragment = new HomePageObjectFragment(mContext);
         Bundle args = new Bundle();
-        args.putInt(DemoObjectFragment.TAB_KEY, position);
+        args.putInt(HomePageObjectFragment.TAB_KEY, position);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,51 +55,5 @@ public class HomePageCollectionPagerAdapter extends FragmentStatePagerAdapter {
                 return "Recommendation";
         }
         return "Empty";
-    }
-
-
-    public static class DemoObjectFragment extends Fragment {
-        public final static String TAB_KEY = "FRAGEMENT_";
-        private Context mContext;
-
-        public DemoObjectFragment(Context mContext) {
-            this.mContext = mContext;
-        }
-
-        public DemoObjectFragment(){
-        }
-
-
-        @Override
-        public View onCreateView(LayoutInflater inflater,
-                                 ViewGroup container, Bundle savedInstanceState) {
-            Bundle args = this.getArguments();
-
-            // Categories Tab
-            View rootView = null;
-            if (args.getInt(TAB_KEY) == 1) {
-                // Style Tab
-                rootView = inflater.inflate(
-                        R.layout.style_activity, container, false);
-
-                LinearLayout linearLayout = (LinearLayout) rootView.findViewById(R.id.style_layout);
-                linearLayout.setPadding(linearLayout.getPaddingLeft(), 300, linearLayout.getPaddingRight(), linearLayout.getPaddingBottom());   // TODO: 正确设置 Padding Top
-
-                /* 配置 ListView & Adapter */
-                ListView lvStyle = (ListView) linearLayout.findViewById(R.id.style_listview);
-                lvStyle.setAdapter(new StyleListAdapter(mContext));
-            } else if (args.getInt(TAB_KEY) == 0) {
-                rootView = inflater.inflate(
-                        R.layout.category_activity, container, false);
-
-                LinearLayout linearLayout = (LinearLayout) rootView.findViewById(R.id.category_layout);
-                linearLayout.setPadding(linearLayout.getPaddingLeft(), 300, linearLayout.getPaddingRight(), linearLayout.getPaddingBottom());   // TODO: 正确设置 Padding Top
-
-                /* 配置 GridView */
-                GridView gvCategory = (GridView) linearLayout.findViewById(R.id.category_gridview);
-                gvCategory.setAdapter(new CategoryListAdapter(mContext));
-            }
-            return rootView;
-        }
     }
 }

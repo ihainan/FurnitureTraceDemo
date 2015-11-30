@@ -1,9 +1,8 @@
 package ihainan.me.androiduidesign.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -37,33 +36,36 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    searchText.setTextColor(Color.rgb(255, 255, 255));
+                    searchText.setTextColor(Color.WHITE);
+                    Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 } else {
                     searchText.setTextColor(Color.rgb(181, 181, 181));
+                    searchText.setTextColor(getResources().getColor(R.color.search_button_color));
                 }
                 return true;
             }
         });
 
         /* 隐藏后退按钮 */
-        ImageView backButton = (ImageView) findViewById(R.id.btn_back);
+        ImageView backButton = (ImageView) findViewById(R.id.back_btn);
         backButton.setVisibility(View.INVISIBLE);
+
+        /* 设置个人页按钮 */
+        ((ImageView)findViewById(R.id.person_page_btn)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 Intent intent = new Intent(getApplicationContext(), PersonInfoActivity.class);
+                 startActivity(intent);
+            }
+        });
 
         /* 设置 Tabs */
         ViewPager viewPaper = (ViewPager) findViewById(R.id.pager);
         viewPaper.setAdapter(new HomePageCollectionPagerAdapter(getSupportFragmentManager(), this));
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPaper);
-
-        /* 设置 Action Button */
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override

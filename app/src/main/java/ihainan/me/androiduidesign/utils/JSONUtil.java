@@ -8,6 +8,7 @@ import java.util.List;
 
 import ihainan.me.androiduidesign.model.Furniture;
 import ihainan.me.androiduidesign.model.User;
+import ihainan.me.androiduidesign.model.Vote;
 
 /**
  * JSON 解析工具类
@@ -15,6 +16,18 @@ import ihainan.me.androiduidesign.model.User;
  * @author LiNan
  */
 public class JSONUtil {
+    /**
+     * 从 JSON 数据中解析得到投票信息
+     *
+     * @param jsonData JSON 文本数据
+     * @return Vote 类列表
+     */
+    public static List<Vote> parseVoteList(String jsonData){
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        List<Vote> voteList = gson.fromJson(jsonData, new TypeToken<List<Vote>>(){}.getType());
+        return voteList;
+    }
+
     /**
      * 从 JSON 数据中解析得到用户验证结果信息
      *

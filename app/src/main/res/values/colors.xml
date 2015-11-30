@@ -3,5 +3,17 @@
     <color name="colorPrimary">#62273D</color>
     <color name="colorPrimaryDark">#562336</color>
     <color name="colorAccent">#67283F</color>
+    <color name="colorBackground">#EBEDEE</color>
     <color name="actionBarSearchTextClicked">#FFFFFF</color>
+    <color name="red_pink_24">#ffe09280</color>
+    <color name="red_pink_26">#ffec70b9</color>
+    <color name="field_color">#a45dafcf</color>
+    <color name="search_button_color">#B5B5B5</color>
+
+    <color name="background">#EBEAE6</color>
+
+    <color name="bottom_layout_background">#2F2F2F</color>
+    <color name="bottom_layout_text">#E35890</color>
+    <color name="bottom_layout_bottom">#EA9C51</color>
+    <color name="bottom_layout_bottom_vote">#EA7F51</color>
 </resources>

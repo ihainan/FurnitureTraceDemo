@@ -7,6 +7,7 @@
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
+    <!-- Toolbar -->
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,12 +24,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="HOME"
+                    android:textColor="#FFF"
+                    android:textSize="20sp" />
+
                 <ImageView
-                    android:id="@+id/btn_back"
+                    android:id="@+id/back_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
+                    android:paddingRight="@dimen/toolbar_icon_padding_left_or_right"
                     android:src="@drawable/ic_arrow_back_white_24dp" />
 
                 <LinearLayout
@@ -51,16 +61,18 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:gravity="center"
-                        android:text="Search Furnitures"
-                        android:textColor="#B5B5B5" />
+                        android:text="Search Furniture"
+                        android:textColor="@color/search_button_color" />
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/person_page_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="13dp"
+                    android:paddingLeft="@dimen/toolbar_icon_padding_left_or_right"
                     android:src="@drawable/ic_perm_identity_white_24dp" />
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
@@ -68,21 +80,13 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="fill_parent"
-            android:layout_height="@dimen/actionbar_height"
+            android:layout_height="@dimen/table_layout_height"
             app:layout_scrollFlags="scroll|enterAlways" />
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
-
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize" />
 </android.support.design.widget.CoordinatorLayout>
