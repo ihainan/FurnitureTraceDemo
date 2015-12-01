@@ -65,4 +65,16 @@ public class JSONUtil {
                 }.getType());
         return furList;
     }
+
+    /**
+     * 从 JSON 数据中解析得到投票信息
+     *
+     * @param jsonData JSON 文本数据
+     * @return Vote 类实例
+     */
+    public static Vote parseVote(String jsonData){
+        Gson gson = new Gson();
+        Vote vote = gson.fromJson(jsonData, Vote.class);
+        return vote;
+    }
 }

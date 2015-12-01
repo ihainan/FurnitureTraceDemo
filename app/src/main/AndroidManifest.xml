@@ -27,8 +27,7 @@
         </activity>
         <activity
             android:name=".activities.LoginActivity"
-            android:label="@string/title_activity_login">
-        </activity>
+            android:label="@string/title_activity_login"></activity>
         <activity
             android:name=".activities.ItemListStaggeredActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -44,6 +43,10 @@
         <activity
             android:name=".activities.PersonInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="WEIXIN_APP_ID"
+            android:value="wxf3550eb8c131cdff" />
     </application>
 
 </manifest>

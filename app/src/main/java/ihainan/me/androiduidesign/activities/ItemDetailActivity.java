@@ -2,14 +2,11 @@ package ihainan.me.androiduidesign.activities;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -43,10 +40,12 @@ import ihainan.me.androiduidesign.model.Furniture;
 import ihainan.me.androiduidesign.model.Logistics;
 import ihainan.me.androiduidesign.model.Pic;
 import ihainan.me.androiduidesign.model.ShoppingCart;
+import ihainan.me.androiduidesign.model.Vote;
 import ihainan.me.androiduidesign.utils.ClientRequestQueue;
 import ihainan.me.androiduidesign.utils.CommonUtils;
 import ihainan.me.androiduidesign.utils.JSONUtil;
 import ihainan.me.androiduidesign.utils.NumZero;
+import ihainan.me.androiduidesign.utils.WeChatShareManager;
 
 public class ItemDetailActivity extends AppCompatActivity {
     private final static String TAG = ItemDetailActivity.class.getSimpleName();
@@ -112,6 +111,45 @@ public class ItemDetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(ItemDetailActivity.this, PersonInfoActivity.class);
                 intent.putExtra(PersonInfoActivity.PAGE_TAG, 1);
                 startActivity(intent);
+            }
+        });
+
+        /* 分享 */
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /* 构造投票请求 URL */
+                SharedPreferences userProfile = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+                int userID = userProfile.getInt(LoginActivity.PREFS_FIELD_USER_ID, 5);
+                mUrl = ClientRequestQueue.BASE_URL_VOTE + "create&userid=" + userID + "&fur_id=" + furniture.getFur_id();
+
+                // 从远程服务器中拉取数据
+                StringRequest strReq = new StringRequest(Request.Method.GET, mUrl, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, response);
+                        int voteID = Integer.valueOf(response);
+
+                        // 分享到微信
+                        String shareURL = "http://furnituretrace.sinaapp.com/static/vote.html?fur_id=" + furniture.getFur_id() + "&vot_id=" + voteID;
+                        WeChatShareManager.ShareContent shareContent = new WeChatShareManager.ShareContent(
+                                shareURL,
+                                "我想买" + furniture.getFur_type() + "，帮我决定值不值吧！",
+                                "哎呀这个家具值不值得买，快来给我投票呀",
+                                R.drawable.logo_circle,
+                                WeChatShareManager.WECHAT_SHARE_TYPE_FRIENDS);
+                        WeChatShareManager.getInstance(ItemDetailActivity.this).shareWebPage(shareContent);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        Log.e(TAG, "发送请求 " + mUrl + " 失败 :" + error.getStackTrace());
+                    }
+                });
+
+                // 将请求加入到队列当中
+                ClientRequestQueue.getInstance(getApplicationContext()).addToRequestQueue(strReq);
             }
         });
 
