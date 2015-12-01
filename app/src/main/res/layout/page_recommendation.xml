@@ -8,7 +8,10 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <RelativeLayout
             android:id="@+id/recommendation_layout"
@@ -49,7 +52,6 @@
                         android:hint="Type Budget Here"
                         android:imeOptions="actionSearch"
                         android:singleLine="true"
-                        android:text="20000"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="#B38B9A"
                         android:textCursorDrawable="@drawable/color_cursor_white_bg" />

@@ -52,6 +52,8 @@ public class HomePageObjectFragment extends Fragment {
         setRetainInstance(true);
     }
 
+    private View rootViewTabType, rootViewTabStyle, rootViewTabRec;
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,35 +63,40 @@ public class HomePageObjectFragment extends Fragment {
         float actionBarHeight = CommonUtils.getToolBarHeight(mContext) + CommonUtils.dpToPixel(mContext, 30);
 
         // Type Tab
-        View rootView = null;
         if (args.getInt(TAB_KEY) == 0) {
-            rootView = inflater.inflate(
+            if (rootViewTabType != null) return rootViewTabType;
+            rootViewTabType = inflater.inflate(
                     R.layout.page_type, container, false);
 
             /* 设置 MarginTop */
-            LinearLayout linearLayout = (LinearLayout) rootView.findViewById(R.id.type_layout);
+            LinearLayout linearLayout = (LinearLayout) rootViewTabType.findViewById(R.id.type_layout);
             linearLayout.setPadding(linearLayout.getPaddingLeft(), (int) actionBarHeight, linearLayout.getPaddingRight(), linearLayout.getPaddingBottom());
 
             /* 配置 GridView */
             StaggeredGridView gvCategory = (StaggeredGridView) linearLayout.findViewById(R.id.grid_view);
             gvCategory.setAdapter(new TypeListAdapter(mContext));
+            return rootViewTabType;
         } else if (args.getInt(TAB_KEY) == 1) {
             // Style Tab
-            rootView = inflater.inflate(
+            if (rootViewTabStyle != null) return rootViewTabStyle;
+            rootViewTabStyle = inflater.inflate(
                     R.layout.page_style, container, false);
 
-            LinearLayout linearLayout = (LinearLayout) rootView.findViewById(R.id.style_layout);
+
+            LinearLayout linearLayout = (LinearLayout) rootViewTabStyle.findViewById(R.id.style_layout);
             linearLayout.setPadding(linearLayout.getPaddingLeft(), (int) actionBarHeight, linearLayout.getPaddingRight(), linearLayout.getPaddingBottom());
 
             /* 配置 GridView & Adapter */
             StaggeredGridView gvCategory = (StaggeredGridView) linearLayout.findViewById(R.id.grid_view);
             gvCategory.setAdapter(new StyleListAdapter(mContext));
+            return rootViewTabStyle;
         } else if (args.getInt(TAB_KEY) == 2) {
             // Style Tab
-            rootView = inflater.inflate(
-                    R.layout.page_recommendation, container, false);
+            if (rootViewTabRec != null) return rootViewTabRec;
 
-            final RelativeLayout linearLayout = (RelativeLayout) rootView.findViewById(R.id.recommendation_layout);
+            rootViewTabRec = inflater.inflate(
+                    R.layout.page_recommendation, container, false);
+            final RelativeLayout linearLayout = (RelativeLayout) rootViewTabRec.findViewById(R.id.recommendation_layout);
             linearLayout.setPadding(linearLayout.getPaddingLeft(), (int) actionBarHeight, linearLayout.getPaddingRight(), linearLayout.getPaddingBottom());
 
             final TextView hintText = (TextView) linearLayout.findViewById(R.id.hint_text);
@@ -143,8 +150,8 @@ public class HomePageObjectFragment extends Fragment {
                                 /* 配置 Slider */
                                 configSliderLayout(sliderLayoutOne, collocation.get简约现代());
                                 configSliderLayout(sliderLayoutTwo, collocation.get中式现代());
-                                configSliderLayout(sliderLayoutTwo, collocation.get美式乡村());
-                                configSliderLayout(sliderLayoutTwo, collocation.get韩式田园());
+                                configSliderLayout(sliderLayoutThree, collocation.get美式乡村());
+                                configSliderLayout(sliderLayoutFour, collocation.get韩式田园());
                             }
                         }, new Response.ErrorListener() {
                             @Override
@@ -162,9 +169,10 @@ public class HomePageObjectFragment extends Fragment {
                     return false;
                 }
             });
+            return rootViewTabRec;
         }
 
-        return rootView;
+        return null;
     }
 
     private void configSliderLayout(SliderLayout mDemoSlider, final List<Furniture> furnitureList) {
