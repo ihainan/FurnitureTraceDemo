@@ -40,7 +40,6 @@ import ihainan.me.androiduidesign.model.Furniture;
 import ihainan.me.androiduidesign.model.Logistics;
 import ihainan.me.androiduidesign.model.Pic;
 import ihainan.me.androiduidesign.model.ShoppingCart;
-import ihainan.me.androiduidesign.model.Vote;
 import ihainan.me.androiduidesign.utils.ClientRequestQueue;
 import ihainan.me.androiduidesign.utils.CommonUtils;
 import ihainan.me.androiduidesign.utils.JSONUtil;
@@ -77,7 +76,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         /* UI Element */
-        mDemoSlider = (SliderLayout) findViewById(R.id.slider);
+        mDemoSlider = (SliderLayout) findViewById(R.id.slider_1);
         RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.main_layout);
         tvItemName = (TextView) findViewById(R.id.item_name);
         tvItemPrice = (TextView) findViewById(R.id.item_price);
@@ -270,7 +269,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                 Logistics log = logs.get(i);
                 TableRow tableRow = (TableRow) LayoutInflater.from(getApplicationContext()).inflate(R.layout.content_item_log, null, false);
                 if (i != 0) tableRow.setPadding(tableRow.getPaddingLeft(),
-                        CommonUtils.dpToPixel(getApplicationContext(), getResources().getDimension(R.dimen.table_row_padding_top)),
+                        (int) CommonUtils.dpToPixel(getApplicationContext(), getResources().getDimension(R.dimen.table_row_padding_top)),
                         tableRow.getPaddingRight(),
                         tableRow.getBottom());
                 ((TextView) tableRow.findViewById(R.id.item_log_date)).setText("" + new SimpleDateFormat("yyyy-MM-dd").format(log.getLog_date()).toString());

@@ -3,6 +3,7 @@ package ihainan.me.androiduidesign.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -68,6 +69,11 @@ public class PersonInfoActivity extends AppCompatActivity {
         mTvShoppingCart = (TextView) findViewById(R.id.shopping_cart_number);
         mLayoutVotes = (RelativeLayout) findViewById(R.id.btn_votes_number);
         mLayoutShoppingCart = (RelativeLayout) findViewById(R.id.btn_shopping_cart);
+
+        /* 用户名 */
+        SharedPreferences userProfile = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+        String userName = userProfile.getString(LoginActivity.PREFS_FIELD_USER_NAME, "ERROR");
+        ((TextView) findViewById(R.id.action_bar_username)).setText(userName);
 
         /* 配置页面 Padding Top */
         float actionBarHeight = 0.0f;

@@ -29,7 +29,7 @@ public class GlobalVar {
         Collections.addAll(TYPES_ENGLISH, new String[]{"bed", "chest", "sofa", "tvbench", "teatable", "dinnertable", "dinnerchair", "bookshelf"});
         Collections.addAll(TYPES_CHINESE, new String[]{"床", "衣柜", "沙发", "电视柜", "茶几", "餐桌", "餐椅", "书柜"});
         Collections.addAll(STYLES_ENGLISH, new String[]{"Modern", "European", "Chinese", "Pastoralism"});
-        Collections.addAll(STYLES_CHINESE, new String[]{"简约现代", "欧式古典", "中式现代", "美式乡村"});
+        Collections.addAll(STYLES_CHINESE, new String[]{"简约现代", "美式乡村", "中式现代", "美式乡村"});
         Collections.addAll(STYLE_DESC, new String[]{
                 "以少胜多，以简胜繁，安静与祥和",
                 "华丽装饰，浓烈色彩，惬意与浪漫",

@@ -47,6 +47,10 @@
         <meta-data
             android:name="WEIXIN_APP_ID"
             android:value="wxf3550eb8c131cdff" />
+
+        <activity
+            android:name=".activities.NewMainActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
+import ihainan.me.androiduidesign.model.Collocation;
 import ihainan.me.androiduidesign.model.Furniture;
 import ihainan.me.androiduidesign.model.User;
 import ihainan.me.androiduidesign.model.Vote;
@@ -22,9 +23,10 @@ public class JSONUtil {
      * @param jsonData JSON 文本数据
      * @return Vote 类列表
      */
-    public static List<Vote> parseVoteList(String jsonData){
+    public static List<Vote> parseVoteList(String jsonData) {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        List<Vote> voteList = gson.fromJson(jsonData, new TypeToken<List<Vote>>(){}.getType());
+        List<Vote> voteList = gson.fromJson(jsonData, new TypeToken<List<Vote>>() {
+        }.getType());
         return voteList;
     }
 
@@ -34,7 +36,7 @@ public class JSONUtil {
      * @param jsonData JSON 文本数据
      * @return User 类实例
      */
-    public static User parseUser(String jsonData){
+    public static User parseUser(String jsonData) {
         Gson gson = new Gson();
         User user = gson.fromJson(jsonData, User.class);
         return user;
@@ -72,9 +74,15 @@ public class JSONUtil {
      * @param jsonData JSON 文本数据
      * @return Vote 类实例
      */
-    public static Vote parseVote(String jsonData){
+    public static Vote parseVote(String jsonData) {
         Gson gson = new Gson();
         Vote vote = gson.fromJson(jsonData, Vote.class);
         return vote;
+    }
+
+    public static Collocation parseFurCollcation(String jsonData) {
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        Collocation coll = gson.fromJson(jsonData, Collocation.class);
+        return coll;
     }
 }

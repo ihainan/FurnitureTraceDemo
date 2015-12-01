@@ -11,6 +11,7 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 
@@ -73,11 +74,13 @@ public class CommonUtils {
      * @param dps     dp 为单位的长度值
      * @return pixel 为单位的长度值
      */
-    public static int dpToPixel(Context context, float dps) {
-        Resources r = context.getResources();
-        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, r.getDisplayMetrics());
-        return (int) px;
+    public static float dpToPixel(Context context, float dps) {
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float px = dps * (metrics.densityDpi / 160f);
+        return px;
     }
+
 
     /**
      * 根据 Resource ID 获取对应的颜色
