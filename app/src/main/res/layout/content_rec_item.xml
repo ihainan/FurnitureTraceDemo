@@ -1,6 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -33,7 +35,7 @@
                 android:background="@color/background"></LinearLayout>
 
             <com.hkm.slider.SliderLayout
-                android:id="@+id/slider"
+                android:id="@+id/slider_new"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/slider_height" />
         </LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -36,6 +37,7 @@ import ihainan.me.androiduidesign.model.Collocation;
 import ihainan.me.androiduidesign.model.Furniture;
 import ihainan.me.androiduidesign.utils.ClientRequestQueue;
 import ihainan.me.androiduidesign.utils.CommonUtils;
+import ihainan.me.androiduidesign.utils.GlobalVar;
 import ihainan.me.androiduidesign.utils.JSONUtil;
 import ihainan.me.androiduidesign.utils.NumZero;
 
@@ -55,8 +57,8 @@ public class HomePageObjectFragment extends Fragment {
     private View rootViewTabType, rootViewTabStyle, rootViewTabRec;
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater,
+                             final ViewGroup container, Bundle savedInstanceState) {
         Bundle args = this.getArguments();
 
         // ToolBar Height
@@ -96,29 +98,26 @@ public class HomePageObjectFragment extends Fragment {
 
             rootViewTabRec = inflater.inflate(
                     R.layout.page_recommendation, container, false);
-            final RelativeLayout linearLayout = (RelativeLayout) rootViewTabRec.findViewById(R.id.recommendation_layout);
-            linearLayout.setPadding(linearLayout.getPaddingLeft(), (int) actionBarHeight, linearLayout.getPaddingRight(), linearLayout.getPaddingBottom());
 
-            final TextView hintText = (TextView) linearLayout.findViewById(R.id.hint_text);
-            final SliderLayout sliderLayoutOne = (SliderLayout) linearLayout.findViewById(R.id.slider_1);
-            final SliderLayout sliderLayoutTwo = (SliderLayout) linearLayout.findViewById(R.id.slider_2);
-            final SliderLayout sliderLayoutThree = (SliderLayout) linearLayout.findViewById(R.id.slider_3);
-            final SliderLayout sliderLayoutFour = (SliderLayout) linearLayout.findViewById(R.id.slider_4);
-            final CardView cardViewOne = (CardView) linearLayout.findViewById(R.id.card_one);
-            final CardView cardViewTwo = (CardView) linearLayout.findViewById(R.id.card_two);
-            final CardView cardViewThree = (CardView) linearLayout.findViewById(R.id.card_three);
-            final CardView cardViewFour = (CardView) linearLayout.findViewById(R.id.card_four);
 
-            final EditText priceEditText = (EditText) linearLayout.findViewById(R.id.input_price);
+            // Layout Padding Top
+            final RelativeLayout layout = (RelativeLayout) rootViewTabRec.findViewById(R.id.recommendation_layout);
+            layout.setPadding(layout.getPaddingLeft(), (int) actionBarHeight, layout.getPaddingRight(), layout.getPaddingBottom());
+
+            // Hint Text
+            final TextView hintText = (TextView) layout.findViewById(R.id.hint_text);
+
+            // Card View
+            final LinearLayout cardViewLayout = (LinearLayout) layout.findViewById(R.id.cardview_layout);
+
+            // Price Search EditText
+            final EditText priceEditText = (EditText) layout.findViewById(R.id.input_price);
             priceEditText.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                         hintText.setVisibility(View.VISIBLE);
-                        cardViewOne.setVisibility(View.INVISIBLE);
-                        cardViewTwo.setVisibility(View.INVISIBLE);
-                        cardViewThree.setVisibility(View.INVISIBLE);
-                        cardViewFour.setVisibility(View.INVISIBLE);
+                        cardViewLayout.removeAllViews();
 
                         // 检测输入是否合法
                         String priceStr = priceEditText.getText().toString();
@@ -136,22 +135,28 @@ public class HomePageObjectFragment extends Fragment {
                         StringRequest strReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                Log.d(TAG, url);
-                                Log.d(TAG, "Response: " + response);
-
-                                hintText.setVisibility(View.INVISIBLE);
-                                cardViewOne.setVisibility(View.VISIBLE);
-                                cardViewTwo.setVisibility(View.VISIBLE);
-                                cardViewThree.setVisibility(View.VISIBLE);
-                                cardViewFour.setVisibility(View.VISIBLE);
-
+                                Log.d(TAG, "URL: " + url + "\nResponse: " + response);
                                 Collocation collocation = JSONUtil.parseFurCollcation(response);
 
-                                /* 配置 Slider */
-                                configSliderLayout(sliderLayoutOne, collocation.get简约现代());
-                                configSliderLayout(sliderLayoutTwo, collocation.get中式现代());
-                                configSliderLayout(sliderLayoutThree, collocation.get美式乡村());
-                                configSliderLayout(sliderLayoutFour, collocation.get韩式田园());
+                                // 显示和隐藏数据
+                                hintText.setVisibility(View.INVISIBLE);
+                                for (int i = 0; i < GlobalVar.STYLES_CHINESE.size(); ++i) {
+                                    View layout = inflater.inflate(R.layout.content_rec_item, container, false);
+                                    CardView cardView = (CardView) layout.findViewById(R.id.card_view);
+                                    TextView textView = (TextView) cardView.findViewById(R.id.rec_type);
+                                    textView.setText(GlobalVar.STYLES_CHINESE.get(i));
+
+                                    SliderLayout sliderLayout = (SliderLayout) layout.findViewById(R.id.slider_new);
+                                    if (i == 0)
+                                        configSliderLayout(sliderLayout, collocation.get简约现代());
+                                    else if (i == 1)
+                                        configSliderLayout(sliderLayout, collocation.get美式乡村());
+                                    else if (i == 2)
+                                        configSliderLayout(sliderLayout, collocation.get中式现代());
+                                    else if (i == 3)
+                                        configSliderLayout(sliderLayout, collocation.get韩式田园());
+                                    cardViewLayout.addView(layout);
+                                }
                             }
                         }, new Response.ErrorListener() {
                             @Override
