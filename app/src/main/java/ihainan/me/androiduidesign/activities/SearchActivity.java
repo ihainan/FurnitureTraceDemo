@@ -3,7 +3,9 @@ package ihainan.me.androiduidesign.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -165,6 +167,15 @@ public class SearchActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            (new AlertDialog.Builder(SearchActivity.this))
+                                    .setTitle(R.string.fail_to_connect_title)
+                                    .setMessage(R.string.fail_to_connect)
+                                    .setPositiveButton(R.string.fail_to_connect_ok, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    }).show();
                             error.printStackTrace();
                             Log.e(TAG, "发送请求 " + url + " 失败 :" + error.getStackTrace());
                         }

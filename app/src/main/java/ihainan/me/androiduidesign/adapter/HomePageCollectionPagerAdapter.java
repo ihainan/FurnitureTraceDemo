@@ -5,17 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 
-import com.etsy.android.grid.StaggeredGridView;
-
-import ihainan.me.androiduidesign.R;
 import ihainan.me.androiduidesign.activities.HomePageObjectFragment;
 
 /**

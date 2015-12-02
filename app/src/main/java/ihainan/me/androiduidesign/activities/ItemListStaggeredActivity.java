@@ -1,5 +1,7 @@
 package ihainan.me.androiduidesign.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +20,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.etsy.android.grid.StaggeredGridView;
+import com.romainpiel.shimmer.Shimmer;
+import com.romainpiel.shimmer.ShimmerTextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,6 +42,7 @@ public class ItemListStaggeredActivity extends AppCompatActivity {
     /* UI Elements */
     private StaggeredGridView mGridView;
     private TextView tvSearch;
+    private ShimmerTextView mHintText;
 
     private List<Furniture> mNewFurnitureItems = new ArrayList<Furniture>();
     private String mUrl;
@@ -55,6 +60,10 @@ public class ItemListStaggeredActivity extends AppCompatActivity {
         /* UI elements */
         mGridView = (StaggeredGridView) findViewById(R.id.grid_view);
         tvSearch = (TextView) findViewById(R.id.action_bar_search_text);
+        mHintText = (ShimmerTextView) findViewById(R.id.hint_text);
+
+        /* 设置 mHintText */
+        (new Shimmer()).start(mHintText);
 
         /* 设置 Toolbar */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -126,6 +135,15 @@ public class ItemListStaggeredActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                (new AlertDialog.Builder(ItemListStaggeredActivity.this))
+                        .setTitle(R.string.fail_to_connect_title)
+                        .setMessage(R.string.fail_to_connect)
+                        .setPositiveButton(R.string.fail_to_connect_ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
                 error.printStackTrace();
                 Log.e(TAG, "发送请求 " + mUrl + " 失败 :" + error.getStackTrace());
             }
@@ -139,6 +157,7 @@ public class ItemListStaggeredActivity extends AppCompatActivity {
     private Runnable returnRes = new Runnable() {
         @Override
         public void run() {
+            mHintText.setVisibility(View.INVISIBLE);
             final List<Furniture> furnitureList = new ArrayList<Furniture>();
             Collections.copy(mNewFurnitureItems, furnitureList);
             mGridView.setAdapter(new StaggeredItemAdapter(getApplicationContext(), mNewFurnitureItems));

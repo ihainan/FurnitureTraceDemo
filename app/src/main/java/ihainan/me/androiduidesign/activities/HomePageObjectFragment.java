@@ -1,10 +1,11 @@
 package ihainan.me.androiduidesign.activities;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -26,13 +27,15 @@ import com.etsy.android.grid.StaggeredGridView;
 import com.hkm.slider.SliderLayout;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.SliderTypes.TextSliderView;
+import com.romainpiel.shimmer.Shimmer;
+import com.romainpiel.shimmer.ShimmerTextView;
 
 import java.util.HashMap;
 import java.util.List;
 
 import ihainan.me.androiduidesign.R;
-import ihainan.me.androiduidesign.adapter.TypeListAdapter;
 import ihainan.me.androiduidesign.adapter.StyleListAdapter;
+import ihainan.me.androiduidesign.adapter.TypeListAdapter;
 import ihainan.me.androiduidesign.model.Collocation;
 import ihainan.me.androiduidesign.model.Furniture;
 import ihainan.me.androiduidesign.utils.ClientRequestQueue;
@@ -105,7 +108,7 @@ public class HomePageObjectFragment extends Fragment {
             layout.setPadding(layout.getPaddingLeft(), (int) actionBarHeight, layout.getPaddingRight(), layout.getPaddingBottom());
 
             // Hint Text
-            final TextView hintText = (TextView) layout.findViewById(R.id.hint_text);
+            final ShimmerTextView hintText = (ShimmerTextView) layout.findViewById(R.id.hint_text);
 
             // Card View
             final LinearLayout cardViewLayout = (LinearLayout) layout.findViewById(R.id.cardview_layout);
@@ -116,7 +119,9 @@ public class HomePageObjectFragment extends Fragment {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                        final Shimmer shimmer = new Shimmer();
                         hintText.setVisibility(View.VISIBLE);
+                        shimmer.start(hintText);
                         cardViewLayout.removeAllViews();
 
                         // 检测输入是否合法
@@ -161,6 +166,15 @@ public class HomePageObjectFragment extends Fragment {
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                (new AlertDialog.Builder(mContext))
+                                        .setTitle(R.string.fail_to_connect_title)
+                                        .setMessage(R.string.fail_to_connect)
+                                        .setPositiveButton(R.string.fail_to_connect_ok, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        }).show();
                                 error.printStackTrace();
                                 Log.e(TAG, "发送请求 " + url + " 失败 :" + error.getStackTrace());
                             }

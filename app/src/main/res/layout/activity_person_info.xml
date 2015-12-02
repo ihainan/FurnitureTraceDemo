@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="bottom|center_horizontal"
-                        android:text="0"
+                        android:text="loading"
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp" />
 
@@ -135,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="bottom|center_horizontal"
-                        android:text="0"
+                        android:text="loading"
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp" />
 
