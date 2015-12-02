@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.widget.CardView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -115,11 +116,13 @@ public class HomePageObjectFragment extends Fragment {
 
             // Price Search EditText
             final EditText priceEditText = (EditText) layout.findViewById(R.id.input_price);
+            priceEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
             priceEditText.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                         final Shimmer shimmer = new Shimmer();
+                        hintText.setText(R.string.recommendation_hint_text);
                         hintText.setVisibility(View.VISIBLE);
                         shimmer.start(hintText);
                         cardViewLayout.removeAllViews();
@@ -175,6 +178,8 @@ public class HomePageObjectFragment extends Fragment {
                                                 dialog.dismiss();
                                             }
                                         }).show();
+                                hintText.setText(R.string.fail_to_connect);
+                                shimmer.cancel();
                                 error.printStackTrace();
                                 Log.e(TAG, "发送请求 " + url + " 失败 :" + error.getStackTrace());
                             }

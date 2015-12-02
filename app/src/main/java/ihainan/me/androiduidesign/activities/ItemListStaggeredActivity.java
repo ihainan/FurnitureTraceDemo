@@ -4,11 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -43,6 +42,7 @@ public class ItemListStaggeredActivity extends AppCompatActivity {
     private StaggeredGridView mGridView;
     private TextView tvSearch;
     private ShimmerTextView mHintText;
+    private Shimmer mShimmer;
 
     private List<Furniture> mNewFurnitureItems = new ArrayList<Furniture>();
     private String mUrl;
@@ -63,7 +63,8 @@ public class ItemListStaggeredActivity extends AppCompatActivity {
         mHintText = (ShimmerTextView) findViewById(R.id.hint_text);
 
         /* 设置 mHintText */
-        (new Shimmer()).start(mHintText);
+        mShimmer = new Shimmer();
+        mShimmer.start(mHintText);
 
         /* 设置 Toolbar */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -144,6 +145,8 @@ public class ItemListStaggeredActivity extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         }).show();
+                mHintText.setText(R.string.fail_to_connect);
+                mShimmer.cancel();
                 error.printStackTrace();
                 Log.e(TAG, "发送请求 " + mUrl + " 失败 :" + error.getStackTrace());
             }

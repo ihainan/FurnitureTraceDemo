@@ -111,9 +111,10 @@
 
     <!-- UI -->
     <string name="search_normal_text">Search Furniture</string>
+    <string name="recommendation_hint_text">Recommendation Result Will Be Shown Here :D</string>
 
     <!-- Internet -->
-    <string name="fail_to_connect">Failed to connect to server, please try again later.</string>
+    <string name="fail_to_connect">Opps! Failed to connect to server, please try again later :(</string>
     <string name="fail_to_connect_title">Notice</string>
     <string name="fail_to_connect_ok">OK</string>
 </resources>
