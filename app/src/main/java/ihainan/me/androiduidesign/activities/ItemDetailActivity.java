@@ -27,6 +27,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.elbbbird.android.socialsdk.SocialSDK;
+import com.elbbbird.android.socialsdk.model.SocialShareScene;
 import com.hkm.slider.SliderLayout;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.SliderTypes.TextSliderView;
@@ -48,6 +50,8 @@ import ihainan.me.androiduidesign.utils.WeChatShareManager;
 
 public class ItemDetailActivity extends AppCompatActivity {
     private final static String TAG = ItemDetailActivity.class.getSimpleName();
+
+    public static final int SHARE_ID = 9527;
 
     // Intent Extras
     public final static String ITEM_ID_ = "ITEM_ID";
@@ -130,14 +134,24 @@ public class ItemDetailActivity extends AppCompatActivity {
                         int voteID = Integer.valueOf(response);
 
                         // 分享到微信
-                        String shareURL = "http://furnituretrace.sinaapp.com/static/vote.html?fur_id=" + furniture.getFur_id() + "&vot_id=" + voteID;
+                        String shareURL = "http://10.1.114.25/furniture/static/vote.html?fur_id=" + furniture.getFur_id() + "&vot_id=" + voteID;
                         WeChatShareManager.ShareContent shareContent = new WeChatShareManager.ShareContent(
                                 shareURL,
                                 "我想买" + furniture.getFur_type() + "，帮我决定值不值吧！",
                                 "哎呀这个家具值不值得买，快来给我投票呀",
                                 R.drawable.logo_circle,
-                                WeChatShareManager.WECHAT_SHARE_TYPE_FRIENDS);
-                        WeChatShareManager.getInstance(ItemDetailActivity.this).shareWebPage(shareContent);
+                                WeChatShareManager.WECHAT_SHARE_TYPE_TALK);
+                        // WeChatShareManager.getInstance(ItemDetailActivity.this).shareWebPage(shareContent);
+                        SocialSDK.setDebugMode(true);
+                        SocialSDK.init("wxf3550eb8c131cdff", "weibo_app_id", "qq_app_id");
+                        SocialSDK.shareTo(ItemDetailActivity.this,
+                                new SocialShareScene(SHARE_ID,
+                                        null,
+                                        SocialShareScene.SHARE_TYPE_WECHAT,
+                                        "我想买" + furniture.getFur_type() + "，帮我决定值不值吧！",
+                                        "哎呀这个家具值不值得买，快来给我投票呀",
+                                        "https://mmbiz.qlogo.cn/mmbiz/b8qLPUsicjFQVlonTQbC2aV5wBYSUHYz0CYbyMPWZ1rWCZXaMNKkmHXXqicr9ibw7C3pZHLmibYf0349icfE5W4tqtw/0?wx_fmt=png",
+                                        shareURL));
                     }
                 }, new Response.ErrorListener() {
                     @Override

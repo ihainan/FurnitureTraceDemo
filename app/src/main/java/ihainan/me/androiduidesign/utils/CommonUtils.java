@@ -31,18 +31,17 @@ public class CommonUtils {
      * @param cManager Camera Manager 服务
      * @return 前置摄像头 ID，获取失败返回 Null
      */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static String getFrontFacingCameraId(CameraManager cManager) {
-        try {
-            for (final String cameraId : cManager.getCameraIdList()) {
-                CameraCharacteristics characteristics = cManager.getCameraCharacteristics(cameraId);
-                int cOrientation = characteristics.get(CameraCharacteristics.LENS_FACING);
-                if (cOrientation == CameraCharacteristics.LENS_FACING_FRONT) return cameraId;
-            }
-        } catch (CameraAccessException e) {
-            Log.e(TAG, "获取后置摄像头失败");
-            return null;
-        }
+//        try {
+//            for (final String cameraId : cManager.getCameraIdList()) {
+//                CameraCharacteristics characteristics = cManager.getCameraCharacteristics(cameraId);
+//                int cOrientation = characteristics.get(CameraCharacteristics.LENS_FACING);
+//                if (cOrientation == CameraCharacteristics.LENS_FACING_FRONT) return cameraId;
+//            }
+//        } catch (CameraAccessException e) {
+//            Log.e(TAG, "获取后置摄像头失败");
+//            return null;
+//        }
         return null;
     }
 
@@ -52,18 +51,18 @@ public class CommonUtils {
      * @param cManager Camera Manager 服务
      * @return 后置摄像头 ID，获取失败返回 Null
      */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    // @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static String getRearFacingCameraId(CameraManager cManager) {
-        try {
-            for (final String cameraId : cManager.getCameraIdList()) {
-                CameraCharacteristics characteristics = cManager.getCameraCharacteristics(cameraId);
-                int cOrientation = characteristics.get(CameraCharacteristics.LENS_FACING);
-                if (cOrientation == CameraCharacteristics.LENS_FACING_BACK) return cameraId;
-            }
-        } catch (CameraAccessException e) {
-            Log.e(TAG, "获取后置摄像头失败");
-            return null;
-        }
+//        try {
+//            for (final String cameraId : cManager.getCameraIdList()) {
+//                CameraCharacteristics characteristics = cManager.getCameraCharacteristics(cameraId);
+//                int cOrientation = characteristics.get(CameraCharacteristics.LENS_FACING);
+//                if (cOrientation == CameraCharacteristics.LENS_FACING_BACK) return cameraId;
+//            }
+//        } catch (CameraAccessException e) {
+//            Log.e(TAG, "获取后置摄像头失败");
+//            return null;
+//        }
         return null;
     }
 

@@ -11,6 +11,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -45,4 +46,5 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.romainpiel.shimmer:library:1.4.0@aar'
     compile 'it.neokree:MaterialTabs:0.11'
+    compile 'com.elbbbird.android:socialsdk:0.2.0@aar'
 }

@@ -73,6 +73,7 @@ public class PersonInfoActivity extends AppCompatActivity {
         /* 用户名 */
         SharedPreferences userProfile = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
         String userName = userProfile.getString(LoginActivity.PREFS_FIELD_USER_NAME, "ERROR");
+        int userID = userProfile.getInt(LoginActivity.PREFS_FIELD_USER_ID, 5);
         ((TextView) findViewById(R.id.action_bar_username)).setText(userName);
 
         /* 配置页面 Padding Top */
@@ -115,7 +116,7 @@ public class PersonInfoActivity extends AppCompatActivity {
         });
 
 
-        mUrl = ClientRequestQueue.BASE_URL_VOTE + "voteList" + "&" + "userid=" + 5;
+        mUrl = ClientRequestQueue.BASE_URL_VOTE + "voteList" + "&" + "userid=" + userID;
     }
 
     /* 获取数据完毕，更新 UI */
@@ -170,7 +171,7 @@ public class PersonInfoActivity extends AppCompatActivity {
     public View getView() {
         // 投票页
         if (mCurrentPage == 0) {
-            if (mGridViewVote != null) return mGridViewVote;
+            // if (mGridViewVote != null) return mGridViewVote;
             mGridViewVote = (StaggeredGridView) LayoutInflater.from(getApplicationContext()).inflate(R.layout.page_votes, null, false);
             mGridViewVote.setAdapter(new BaseAdapter() {
                 private LayoutInflater mVi;

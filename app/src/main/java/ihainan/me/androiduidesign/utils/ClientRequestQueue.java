@@ -12,9 +12,10 @@ import com.android.volley.toolbox.Volley;
  * 单例 RequestQueue，用于向服务器发送 HTTP 请求
  */
 public class ClientRequestQueue {
-    public final static String BASE_URL_USER = "http://furnituretrace.sinaapp.com/controller/UserInfo.php?action=";
-    public final static String BASE_URL_VOTE = "http://furnituretrace.sinaapp.com/controller/VoteInfo.php?action=";
-    public final static String BASE_URL_FUR = "http://furnituretrace.sinaapp.com/controller/FurnitureInfo.php?action=";
+    public final static String BASE_URL = "http://10.1.114.25/furniture/";
+    public final static String BASE_URL_USER = BASE_URL + "controller/UserInfo.php?action=";
+    public final static String BASE_URL_VOTE = BASE_URL + "controller/VoteInfo.php?action=";
+    public final static String BASE_URL_FUR = BASE_URL + "controller/FurnitureInfo.php?action=";
 
     public static final String TAG = ClientRequestQueue.class.getSimpleName();
     private RequestQueue mRequestQueue;
